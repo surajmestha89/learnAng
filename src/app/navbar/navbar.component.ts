@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomService } from '../custom.service';
+import {  ActivatedRoute } from '@angular/router';
+// import { CustomService } from '../custom.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,22 +9,28 @@ import { CustomService } from '../custom.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private service:CustomService) { }
+  constructor(private route:ActivatedRoute) { }
   grid:Array<any>=[];
-  obj:any;
+  obj:string = '';
   isedit:boolean = false;
   ngOnInit(): void {
-    this.grid = this.service.displayitem();
+    // this.grid = this.service.displayitem();
+    // this.obj = history.state.data;
+     this.route.queryParams.subscribe(
+      data=> {this.obj = data.Id;
+      console.log(this.obj)
+      }
+      )
   }
  edit(item:any){
    this.obj = item;
    this.isedit = true;
  }
- delete(item:any){
-   this.service.deleteitem(item.RID);
-   this.grid = this.service.displayitem();
- }
- getaction(action:any){
-  this.isedit = action;
- }
+//  delete(item:any){
+//    this.service.deleteitem(item.RID);
+//    this.grid = this.service.displayitem();
+//  }
+//  getaction(action:any){
+//   this.isedit = action;
+//  }
 }

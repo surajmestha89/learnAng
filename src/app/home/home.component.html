@@ -1,15 +1,196 @@
-<div class="container">
-    <h3 class="text-center text-primary pt-4">httpclient in Angular</h3>
+<div class="container border p-4">
+
+  <div class="form-group border border-info p-3 mb-3">
+    <label for="" class="form-label"> Select Task :</label>
+    
+
+  
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="1" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task 1
+    </label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="2" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task 2
+    </label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="3" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task  3
+    </label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="4" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task 4
+    </label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="5" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task 5
+    </label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="6" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task 6
+    </label>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+  <!-- task 1  -->
+  <div *ngIf="task === '1'">
+      <div class="text-center text-primary pt-4 display-4">First component</div>
    
   <div class="col-md-3 offset-md-4 mt-5 ">
-    <h4>routing concepts</h4>
-    <ul>
-    <!-- <li *ngFor="let item of itemlist"> {{item.name}}</li> -->
+  <div class="form-group mb-3">
+    <input type="text" placeholder="Enter name" class="form-control" [(ngModel)]="name">
+  </div>
+  <div class="form-group">
+    <input type="text" placeholder="Enter city" class="form-control" [(ngModel)]="city">
+  </div>
+<div class="col-md-12 text-center mt-5">
+ <h5 class="text-primary"> pass the  data through routerlink with state directive </h5>
+  <a class="btn btn-primary" [routerLink]="['/demo']" [queryParams]="{name:name}" [state]="{ data: {name:name,city:city}}">click me</a>
+  <h5 class="text-success mt-3"> pass the  data through navigate method with pass state object</h5>
+  <a class="btn btn-success" (click)="clickbtn()">click me</a>
 
-</ul>
-<div class="col-md-12 text-center">
-  <button class="btn btn-primary" >call get api</button>
 </div>
   </div>
-  
+  </div>
+  <!-- task 2  -->
+  <div class="col-md-12 m-4 text-center" *ngIf="task === '2'">
+    <h2 class="display-5 text-info mb-4 display-4">Fetch Json file Data</h2>
+    <h3 class="text-primary font-weight-bold my-2"> fetch the json file data using httpclient's get   method </h3>
+    <h4 class="bg-light px-5 mt-2 py-2">
+       <pre>
+        {{jsonObj|json}}
+       </pre>
+    </h4>
+     <div class="col-md-12 mt-4">
+      <h3 class="text-primary font-weight-bold my-2"> Table </h3>
+       <table class="table table-hover table-bordered table-striped">
+         <thead>
+         
+          <tr class="table-primary">
+            <td>id</td>
+            <td>Name</td>
+            <td>Actions</td>
+            
+          </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let item of jsonObj.data">
+             <td>{{item.user_id}}</td>
+             <td>{{item.name}}</td>
+             <td><button class="btn btn-outline-success btn-sm" [routerLink]="['/nav']" [queryParams]="{Id:item.user_id}"> redirect</button></td>
+           </tr>
+         </tbody>
+       </table>
+      
+     </div>
+    
+  </div>
+  <!-- task 3  -->
+  <div class="container" *ngIf="task === '3'">
+    <h2 class="display-5 text-info mb-4 display-4"> pass the data from parent to child (vice versa)</h2>
+    <div class=" form-inline mx-auto mb-3" >
+      <div class="form-group ">
+        <label for="">Enter data</label>
+        <input type="text" class="form-control" placeholder="enter Data" [(ngModel)]="name">
+      </div>
+      <h4>child data : {{cdata}}</h4>
+      <!-- <h4>child data : {{city}}</h4> -->
+    </div>
+    <content [data]='name' (passval)="getchilddata($event)"></content>
+     
+  </div>
+ <!-- task 4  -->
+<div class="container" *ngIf="task === '4'">
+  <h3 class="display-3 text-center text-primary">Template Driven form</h3>
+  <form #simple="ngForm" (ngSubmit)="submit()" novalidate >
+   
+      <div class="form-group">
+        <label for="exampleInputEmail1">username</label>
+        <input type="text" name="email" [(ngModel)]="simpleformobj.username" required #username="ngModel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+        
+      </div>
+      <div *ngIf="username.errors && username.touched" class="text-danger"> 
+        * username required
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name="password" [(ngModel)]="simpleformobj.password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" name="Checkout" [(ngModel)]="simpleformobj.checkout" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn mt-3 btn-primary">Submit</button>
+    
+  </form>
 </div>
+  
+  <!-- task 5  -->
+  <div class="container" *ngIf="task === '5'">
+    <h3 class="display-3 text-center text-primary">Reactive form</h3>
+    <form name="reactive" [formGroup]="formobj" (ngSubmit)="submit2(formobj.value)" novalidate >
+     
+        <div class="form-group">
+          <label for="exampleInputEmail1">username</label>
+          <input type="text" formControlName="username" name="username"  class="form-control" id="username"  placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">username</label>
+            <input type="email" formControlName="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" name="Checkout" formControlName="checkout" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn mt-3 btn-primary">Submit</button>
+      
+    </form>
+  </div>
+   <!-- task 5  -->
+   <div class="container" *ngIf="task === '6'">
+    <h3 class="display-3 text-center text-primary">Reactive form with validations</h3>
+    <form name="reactive" [formGroup]="reactValiadtionFormObj" (ngSubmit)="reactValiadtionFormObj.valid&&submit2(reactValiadtionFormObj.value)" novalidate >
+     
+        <div class="form-group">
+          <label for="exampleInputEmail1">username</label>
+          <input type="text" formControlName="username" name="username" ng-ch [ngClass]="{'error': reactValiadtionFormObj.controls.username.errors}"  class="form-control" id="username"  placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">username</label>
+            <input type="email" formControlName="email" name="email"  class="form-control"  [ngClass]="{'error': reactValiadtionFormObj.controls.email.errors}" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name="password" formControlName="password" class="form-control"  [ngClass]="{'error': reactValiadtionFormObj.controls.password.errors}" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" name="Checkout" formControlName="checkout"  [ngClass]="{'error': reactValiadtionFormObj.controls.checkout.errors}" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn mt-3 btn-primary">Submit</button>
+      
+    </form>
+  </div>

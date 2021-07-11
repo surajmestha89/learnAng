@@ -1,5 +1,6 @@
-import { CustomService } from './../custom.service';
-import { Component,Input, OnInit ,Output,EventEmitter, } from '@angular/core';
+// import { CustomService } from './../custom.service';
+import { Location } from '@angular/common';
+import { Component,Input, OnInit ,Output,EventEmitter, AfterContentChecked, } from '@angular/core';
 import { FormBuilder,Validators,FormGroup,FormControl  } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'; 
 @Component({
@@ -7,54 +8,33 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.css']
 })
-export class DemoComponent implements OnInit {
+export class DemoComponent implements OnInit{
 
   val:any = {};
-  constructor(private service:CustomService,private router:Router,private active:ActivatedRoute,private gp:FormBuilder){
+  routeEmitData:any;
+  val1:any;
+  val2='';
+  name = '';
+  constructor(private router:Router,private route:ActivatedRoute){
+    this.val1 = this.router.getCurrentNavigation()?.extras.state;
+  }
+ ngOnInit(){
 
-  }
-  @Input() updatedata:any;
- @Output()output= new EventEmitter<any>();
-  Json:any;
-  newForm:any;
-  isEdit:boolean = false;
-  userlist:Array<any> = [];
-  ngOnInit(){
-  
-    this.userlist = this.service.displayitem();
-    this.newForm = this.gp.group({
-      city:['',Validators.required],
-      name: ['',[Validators.required,Validators.minLength(10)]],
-      email: ['',[Validators.required,Validators.email]]
-    }
-  )
-  if(this.updatedata){
-    this.newForm.patchValue({
-      city:this.updatedata.city,
-      name:this.updatedata.name,
-      email: this.updatedata.email
-    });
-    this.isEdit = true;
-  }
-  }
-  
-  getformcontrol(){}
+ this.routeEmitData = history.state.data;
+ this.route.queryParams.subscribe(data =>{
+     console.log("get data from queryparms:"+data)
+     this.val1 = data.name;
+   });
 
-  submit(data:any){
-     
-    this.service.additem(data);
-    alert("registered successfully");
-    this.newForm.reset();
+   this.val = JSON.stringify(this.routeEmitData);
+  console.log("get data from history state object:"+this.routeEmitData);
+
+  this.name = (this.routeEmitData)?this.routeEmitData.name:'unkown';
+// alert dialog 
+    setTimeout( ()=>{
+      alert('HI '+ this.name)
+    },1000); 
+ }
     
-  }
-  editform(data:any){
-    data.RID = this.updatedata.RID;
-    this.service.Updatitem(data);
-    this.output.emit(false);
-
-  }
-  
-  
- 
 }
 

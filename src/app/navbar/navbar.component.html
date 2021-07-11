@@ -1,31 +1,6 @@
 <div class="container">
-    <h1 class="text-center  text-primary  border-bottom border-primary"> userlist  </h1>
-   <div *ngIf="grid.length !==0"> 
-       <table class="table table-hover table-bordered">
-    <thead>
-      <tr>
-        <th>name</th>
-        <th>Emai id</th>
-        <th>city</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of grid">
-        <td>{{item.name}}</td>
-        <td>{{item.email}}</td>
-        <td>{{item.city}}</td>
-        <td><button class="btn btn-outline-primary btn-sm mr-md-3" style="margin-right: 10px;" (click)="edit(item)">Edit</button><button (click)="delete(item)" class="btn btn-outline-danger ml-3 btn-sm">Delete</button></td>
-      </tr>
-    </tbody>
-</table></div>
-   <div *ngIf="grid.length ===0">
-       <div class="alert alert-danger text-center col-md-6 offset-3" role="alert">
-           Userlist is empty
-       </div>
-   </div>
-</div>
+    <div class="text-center">
+      <span>get queryparam id is {{obj}}</span>  
 
-<div *ngIf="isedit">
-    <app-demo [updatedata]="obj" (output)="getaction($event)"></app-demo>
+    </div>
 </div>

@@ -1,4 +1,4 @@
-import { CustomService } from './custom.service';
+// import { CustomService } from './custom.service';
 import { Component ,Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 @Component({
@@ -12,7 +12,7 @@ export class AppComponent {
   inputValue:number = 100;
   CurrentDate = new Date();
   val:any = {};
-  constructor(private service:CustomService){
+  constructor(){
 
   }
   ItemList:Array<any> = [];

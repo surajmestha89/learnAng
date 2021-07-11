@@ -1,0 +1,12 @@
+{
+    "message": "Data retrieved",
+    "data": [
+        {
+            "user_id": 1,
+            "name": "Sooraj"
+        },{
+            "user_id": 2,
+            "name": "Sundar"
+        }
+        ]
+    }
