@@ -61,13 +61,6 @@ export class HomeComponent implements OnInit {
       else{
         this.countrylist = this.service.countrylist;
       }
-      // let k  = this.service.GetCountryList().subcribe((data:any) => console.log(data))
-     
-      console.log('test')
-      // this.http.get(environment.Countryurl).subscribe((success:any) =>{
-      //   this.countrylist = success.data.countryList;
-      //   console.log(this.countrylist)
-      // })
       
       
   }
