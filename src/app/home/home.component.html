@@ -41,6 +41,18 @@
       task 6
     </label>
   </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="7" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task 7
+    </label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" value="8" [(ngModel)]="task" >
+    <label class="form-check-label" for="exampleRadios1">
+      task 8
+    </label>
+  </div>
 </div>
 
 
@@ -53,7 +65,7 @@
 
   <!-- task 1  -->
   <div *ngIf="task === '1'">
-      <div class="text-center text-primary pt-4 display-4">First component</div>
+      <h3 class="text-center text-primary pt-4 display-4">Pass the  data through routerlink with state directive</h3>
    
   <div class="col-md-3 offset-md-4 mt-5 ">
   <div class="form-group mb-3">
@@ -65,8 +77,8 @@
 <div class="col-md-12 text-center mt-5">
  <h5 class="text-primary"> pass the  data through routerlink with state directive </h5>
   <a class="btn btn-primary" [routerLink]="['/demo']" [queryParams]="{name:name}" [state]="{ data: {name:name,city:city}}">click me</a>
-  <h5 class="text-success mt-3"> pass the  data through navigate method with pass state object</h5>
-  <a class="btn btn-success" (click)="clickbtn()">click me</a>
+  <!-- <h5 class="text-success mt-3"> pass the  data through navigate method with pass state object</h5>
+  <a class="btn btn-success" (click)="clickbtn()">click me</a> -->
 
 </div>
   </div>
@@ -106,7 +118,7 @@
   </div>
   <!-- task 3  -->
   <div class="container" *ngIf="task === '3'">
-    <h2 class="display-5 text-info mb-4 display-4"> pass the data from parent to child (vice versa)</h2>
+    <h2 class="display-5 text-info mb-4 display-4"> pass the data from parent to child using input/output decorator </h2>
     <div class=" form-inline mx-auto mb-3" >
       <div class="form-group ">
         <label for="">Enter data</label>
@@ -154,7 +166,7 @@
           <input type="text" formControlName="username" name="username"  class="form-control" id="username"  placeholder="Enter username">
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">username</label>
+            <label for="exampleInputEmail1">email</label>
             <input type="email" formControlName="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
         <div class="form-group">
@@ -169,7 +181,7 @@
       
     </form>
   </div>
-   <!-- task 5  -->
+   <!-- task 6  -->
    <div class="container" *ngIf="task === '6'">
     <h3 class="display-3 text-center text-primary">Reactive form with validations</h3>
     <form name="reactive" [formGroup]="reactValiadtionFormObj" (ngSubmit)="reactValiadtionFormObj.valid&&submit2(reactValiadtionFormObj.value)" novalidate >
@@ -179,7 +191,7 @@
           <input type="text" formControlName="username" name="username" ng-ch [ngClass]="{'error': reactValiadtionFormObj.controls.username.errors}"  class="form-control" id="username"  placeholder="Enter username">
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">username</label>
+            <label for="exampleInputEmail1">email</label>
             <input type="email" formControlName="email" name="email"  class="form-control"  [ngClass]="{'error': reactValiadtionFormObj.controls.email.errors}" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
         <div class="form-group">
@@ -193,4 +205,98 @@
         <button type="submit" class="btn mt-3 btn-primary">Submit</button>
       
     </form>
+  </div>
+   <!-- task 7  -->
+   <section id="writeus" *ngIf="task === '7'" class="container-fluid py-md-3  " style="margin-bottom: 130px;">
+    <div id="enqform" class=" mx-md-5 py-md-4 my-md-5 bg-white">
+      <h3 class="text-center ">Contact Form with template driven form</h3>
+      <div class=" product-card shadow pt-md-0">
+        <form class="mt-sm-0 "#simple="ngForm" (ngSubmit)="submit()" novalidate>
+          <div class="row">
+            
+            <div class="col-md-6 border-right py-md-5 px-4">
+             
+            
+            
+              <div class="form-group ">
+                <label for="fname">name</label>
+                <input type="Firstname" [(ngModel)]="simpleformobj.Firstname" required  name="fname"  class="form-control" id="fname"  placeholder="First Name">
+              </div>
+              <div class="form-group ">
+                <label for="exampleInputEmail1"> Email</label>
+                <input type="email" class="form-control" [(ngModel)]="simpleformobj.Email" required name="email"   id="exampleInputEmail1"  placeholder="Email">
+              </div>
+              <div class="form-group ">
+                <label for="phone">phone</label>
+              <div class="row">
+                  <div class="col-md-4">
+                    <select name="countrycode" class="form-control"  style="background-color: #fff;" required  placeholder="country code"  id="countrycode" >
+                      
+                      <option *ngFor="let item of countrylist" [value]="item.countryId">{{item.countryName}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" required   [(ngModel)]="simpleformobj.phoneno" name="phone"  id="phone"  placeholder="phone number" >
+            
+                  </div>
+                </div>
+            </div>
+              
+              
+            </div>
+            <div class="col-md-6 p-md-0 pt-md-5 ">
+              <div class="form-group px-md-4">
+                <label for="msg"></label>
+                <textarea class="form-control" name="message" required placeholder="message"  [(ngModel)]="simpleformobj.msg" id="msg" rows="8"></textarea>
+              </div>
+              
+              <div  id="formSubmit" class="col-md-12 text-center pb-3 ">
+                <button translate="submit" id="FormSubmit"  class="btn-primary text-white btn-block  btn rounded-0">
+                  Submit
+                  </button>
+            </div>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+     </div>
+  </section>
+  <!-- task 6  -->
+  <div class="container" *ngIf="task === '8'">
+    <h3 class="display-3 text-center text-primary">Contact form With Reactive Form</h3>
+    <div class="container px-5">
+      <form name="reactive"  [formGroup]="reactValiadtionFormObj" (ngSubmit)="reactValiadtionFormObj.valid&&submit2(reactValiadtionFormObj)" novalidate >
+     
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" formControlName="username" name="username"  [ngClass]="{'error': reactValiadtionFormObj.controls.username.errors,'sucess':!reactValiadtionFormObj.controls.username.errors}"  class="form-control" id="username"  placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="email" formControlName="email" name="email"  class="form-control"  [ngClass]="{'error': reactValiadtionFormObj.controls.email.errors,'sucess': !reactValiadtionFormObj.controls.email.errors}" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group ">
+              <label for="phone">phone</label>
+            <div class="row">
+                <div class="col-md-4">
+                  <select name="countrycode" formControlName="countrycode" class="form-control" [ngClass]="{'sucess':!reactValiadtionFormObj.controls.countrycode.errors}"  style="background-color: #fff;" required  placeholder="country code"  id="countrycode" >
+                    
+                    <option *ngFor="let item of countrylist" [value]="item.countryId">{{item.countryName}}</option>
+                  </select>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" required  formControlName="phone"[ngClass]="{'error': reactValiadtionFormObj.controls.phone.errors ,'sucess': !reactValiadtionFormObj.controls.phone.errors }"   name="phone"  id="phone"  placeholder="phone number" >
+          
+                </div>
+              </div>
+          </div>
+          <div class="form-group ">
+            <label for="msg">message</label>
+            <textarea class="form-control" name="message" required placeholder="Enter message" [ngClass]="{'error': reactValiadtionFormObj.controls.message.errors ,'sucess': !reactValiadtionFormObj.controls.message.errors }" formControlName="message" id="msg" rows="8"></textarea>
+          </div>
+        <button type="submit" class="btn mt-3 btn-primary">Submit</button>
+      
+    </form>
+    </div>
   </div>

@@ -1,3 +1,14 @@
 .error{
     border:1px solid red;
 }
+.sucess{
+    
+        border:1px solid rgb(32, 231, 82);
+}
+#writeus .form-group{
+    margin-bottom: 10px;
+}
+#writeus label {
+    padding-left: 5px;
+    text-transform: capitalize;
+}

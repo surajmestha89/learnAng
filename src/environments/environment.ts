@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  Countryurl: "https://www.icanrefer.com/api_v1/icrweb/countryMaster?ip=157.45.145.123"
 };
 
 /*

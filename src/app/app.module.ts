@@ -1,3 +1,4 @@
+import { CommonService } from './commonService/common.service';
 import { MatInputModule } from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,6 @@ import { ContentComponent } from './content/content.component';
     HomeComponent,
     NotfoundComponent,
     ContentComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -34,7 +34,7 @@ import { ContentComponent } from './content/content.component';
     MatDialogModule,
     BrowserAnimationsModule
   ],
-  providers: [ ],
+  providers: [CommonService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
