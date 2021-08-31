@@ -1,3 +1,4 @@
+import { AuthguardService } from './authguard.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DemoComponent } from './demo/demo.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-  { path: 'demo', component: DemoComponent },
+  { path: 'demo', component: DemoComponent , canActivate :[AuthguardService] },
   { path: 'nav', component: NavbarComponent },
   { path: 'home', component: HomeComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },

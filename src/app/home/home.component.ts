@@ -3,16 +3,17 @@ import { CommonService } from './../commonService/common.service';
 import { FormGroup, FormControl, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { ContentComponent } from './../content/content.component';
 import { HttpClient } from '@angular/common/http';
-import {  Component, OnInit } from '@angular/core';
+import {  AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { isObservable } from 'rxjs';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,AfterViewInit {
 
  name:string = '';
  simple:any = {};
@@ -21,10 +22,12 @@ export class HomeComponent implements OnInit {
  city:string = '';
  jsonObj:any = {};
  simpleformobj:any ={};
- task:string = '7';
+ task:string = '0';
  reactValiadtionFormObj:any = {};
  cdata:string = '';
-  constructor(private route:Router,private http:HttpClient,private formbuild:FormBuilder,private service:CommonService) { }
+  constructor(private route:Router,private http:HttpClient,private el:ElementRef,private rander:Renderer2,private formbuild:FormBuilder,private service:CommonService) { 
+    this.service.session = '';
+  }
   
   ngOnInit(): void {
 
@@ -47,6 +50,11 @@ export class HomeComponent implements OnInit {
     checkout: ['']
    })
    this.reactValiadtionFormObj.get('countrycode').setValue('88'),
+   this.reactValiadtionFormObj.patchValue({
+    countrycode : '99',
+    phone : 9632529881
+   });
+   
   //  fetch json file 
     this.http.get('./assets/msg.json').subscribe(data =>
       this.jsonObj = data,
@@ -65,6 +73,19 @@ export class HomeComponent implements OnInit {
       
   }
   
+  @ViewChild('demo', { static: false })
+  getdom!: ElementRef;
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.getdom.nativeElement.innerHTML="hello world";
+   let div = this.rander.createElement('div')
+   let content = this.rander.createText('render is for dom cration')
+   this.rander.appendChild(div,content)
+   this.rander.addClass(div,'border')
+   this.rander.appendChild(this.getdom.nativeElement,div)
+    this.getdom.nativeElement.insertAdjacentHTML('afterend', '<div class="two">two</div>');
+  }
   // simple form submit function 
   submit(){
     console.log(this.simpleformobj)
@@ -84,6 +105,7 @@ export class HomeComponent implements OnInit {
   }
   // task 1 
   clickbtn(){
+    this.service.session = this.name;
     let navigateObject = { 
       queryParams:{
         name:this.name

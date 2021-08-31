@@ -14,7 +14,7 @@ export class CommonService {
 
   countryUrl:string = environment.Countryurl;
   countrylist:any;
-
+  session:string = '';
 
 
   

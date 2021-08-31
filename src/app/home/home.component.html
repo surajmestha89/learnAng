@@ -76,10 +76,10 @@
   </div>
 <div class="col-md-12 text-center mt-5">
  <h5 class="text-primary"> pass the  data through routerlink with state directive </h5>
-  <a class="btn btn-primary" [routerLink]="['/demo']" [queryParams]="{name:name}" [state]="{ data: {name:name,city:city}}">click me</a>
-  <!-- <h5 class="text-success mt-3"> pass the  data through navigate method with pass state object</h5>
-  <a class="btn btn-success" (click)="clickbtn()">click me</a> -->
+  <!-- <a class="btn btn-primary" [routerLink]="['/demo']" [queryParams]="{name:name}" [state]="{ data: {name:name,city:city}}">click me</a> -->
+  <!-- <h5 class="text-success mt-3"> pass the  data through navigate method with pass state object</h5>--> 
 
+  <a class="btn btn-success" (click)="clickbtn()">click me</a> 
 </div>
   </div>
   </div>
@@ -300,3 +300,4 @@
     </form>
     </div>
   </div>
+  <div #demo>test</div>
